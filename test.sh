@@ -57,7 +57,3 @@ echo ""
 echo do airdrop according to file contents
 node cli.js 1 $SCA airdrop $TOK testdrop.txt
 
-echo ""
-echo retrieve events
-node cli.js 1 $SCA events
-
