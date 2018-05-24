@@ -5,7 +5,7 @@ const web3 =
   new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 // HARDCODED
-const MYGASPRICE = '' + 1 * 1e9;
+const MYGASPRICE = '' + 8 * 1e9;
 
 function getABI() {
   return JSON.parse( fs.readFileSync('./build/Airdropper_sol_Airdropper.abi')
