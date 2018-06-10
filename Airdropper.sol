@@ -27,9 +27,13 @@ contract owned {
 // NOTE: this Airdropper becomes msg.sender for the token transfer and must
 //       already be the holder of enough tokens
 //
+// NOTE: caller responsible to check ethstats.net for block size limit
+//
 contract Airdropper is owned {
 
-  // NOTE: caller responsible to check ethstats.net for block size limit
+  // distribute according to a number of (address,quantity) tuples. Maximum control but max cost due
+  // to the transaction size
+
   function airdrop( address tokAddr,
                     address[] dests,
                     uint[] quantities ) public onlyOwner returns (uint) {
@@ -40,5 +44,19 @@ contract Airdropper is owned {
 
     return ii;
   }
+
+  // save gas: all destinations will get the same number of token units
+
+  function airdrop( address tokAddr,
+                    address[] dests,
+                    uint quant ) public onlyOwner returns (uint) {
+
+    for (uint ii = 0; ii < dests.length; ii++) {
+      ERC20(tokAddr).transfer( dests[ii], quant );
+    }
+
+    return ii;
+  }
+
 }
 
